@@ -15,7 +15,7 @@ dis_width = 600
 dis_height = 400
  
 dis = pygame.display.set_mode((dis_width, dis_height)) # create a screen \EG
-pygame.display.set_caption('Snake Game by Edureka')
+pygame.display.set_caption('Snake Game by Sana and Ella')
  
 clock = pygame.time.Clock() # 
  
@@ -132,8 +132,8 @@ def gameLoop():
             crunch_sound.play()
             Length_of_snake += 1 # length of snake increases by factor of 1 \EG 
             
-            x1 = round(random.randrange(0,dis_width - foodx) /10.0) * 10.0
-            y1 = round(random.randrange(0,dis_height - foody) /10.0) * 10.0
+            x1 = round(random.randrange(0,dis_width - foodx) /10.0) * 10.0 # snake will be located in random space except for food location \EG
+            y1 = round(random.randrange(0,dis_height - foody) /10.0) * 10.0 # snake will be located in random space except for food location \EG
  
         clock.tick(snake_speed)
  
