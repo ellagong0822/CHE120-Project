@@ -1,9 +1,14 @@
-import pygame
-import time
-import random
+\EG, Ella Gong
+\SA, Sana Ahmed
+
+#import required modules \SA
+import pygame \used to create game and graphics \SA
+import time #used to time track the time \SA
+import random #used to randomize food location \SA
  
 pygame.init() # initialize \EG
  
+#set colour ranges in pygame \SA
 white = (255, 255, 255)
 yellow = (255, 255, 102)
 black = (0, 0, 0)
@@ -11,12 +16,14 @@ red = (213, 50, 80)
 green = (0, 255, 0)
 blue = (50, 153, 213)
  
+#set display width and height \SA
 dis_width = 600
 dis_height = 400
  
 dis = pygame.display.set_mode((dis_width, dis_height)) # create a screen \EG
-pygame.display.set_caption('Snake Game by Edureka')
+pygame.display.set_caption('Snake Game by Edureka') \show display caption \SA
  
+#initialize variable to track amount of time taken \SA
 clock = pygame.time.Clock()
  
 snake_block = 10 # snake's size \EG
@@ -25,23 +32,22 @@ snake_speed = 15 # snake's speed \EG
 font_style = pygame.font.SysFont("bahnschrift", 25) # font is in 25 size with font "bahnschrift" \EG
 score_font = pygame.font.SysFont("comicsansms", 35) # font is in 35 size with font "comicsansms" \EG
  
- 
+#define score function to display score \SA
 def Your_score(score):
-    value = score_font.render("Your Score: " + str(score), True, yellow)
-    dis.blit(value, [0, 0])
+    value = score_font.render("Your Score: " + str(score), True, yellow) #assign variable value, to display core message in yellow \SA
+    dis.blit(value, [0, 0]) #block bit transfer the score at index [0,0] of display \SA
  
- 
- 
+#define snake function to create snake \SA
 def our_snake(snake_block, snake_list):
-    for x in snake_list:
+    for x in snake_list: #for each element in the snake body \SA
         pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block]) # draw a rectangle -> our snake \EG
  
- 
+#define message function to create colour and style of font \SA
 def message(msg, color):
     mesg = font_style.render(msg, True, color) # message is in color with font_style \EG
     dis.blit(mesg, [dis_width / 6, dis_height / 3]) # message is printed on that location \EG
  
- 
+#define gameLoop function to restart game when called \SA
 def gameLoop():
     game_over = False  # If True, game is over \EG
     game_close = False # if True, game over screen appears \EG
@@ -51,77 +57,78 @@ def gameLoop():
  
     x1_change = 0 # change made in moving in x-axis \EG
     y1_change = 0 # change made in moving in y-axis \EG
- 
+    
+    #intialize body of snake as a list \SA
     snake_List = []
     Length_of_snake = 1 #length of snake begins with 1 \EG
  
     foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0 # food's location is randomly chosen except for current location  \EG
     foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0 # food's location is randomly chosen except for current location \EG
  
-    while not game_over: # our screen/game runs while it is not game_over
+    while not game_over: # our screen/game runs while it is not game_over \EG
  
         while game_close == True: # if the game is over \EG
             dis.fill(blue) # the background color is blue \EG
-            message("You Lost! Press C-Play Again or Q-Quit", red)
-            Your_score(Length_of_snake - 1)
+            message("You Lost! Press C-Play Again or Q-Quit", red) #prints lose message on scren \SA
+            Your_score(Length_of_snake - 1) #calls function of score, -1 to negate snake head \SA
             pygame.display.update() # update any changes made to screen \EG
  
-            for event in pygame.event.get():
+            for event in pygame.event.get(): #iterating through each event in pygame \SA
                 if event.type == pygame.KEYDOWN: # if you press a key: \EG
                     if event.key == pygame.K_q: # if you press keyboard "q", game is closed \EG
-                        game_over = True
-                        game_close = False
+                        game_over = True # the game is over \SA
+                        game_close = False #the game is over but screen stills runs \SA
                     if event.key == pygame.K_c: # if press keyboard "c", game loops
                         gameLoop()
  
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                game_over = True
+        for event in pygame.event.get(): #iterating through each event in pygame \SA
+            if event.type == pygame.QUIT:#if event is QUIT \SA
+                game_over = True #the game is over \SA
             if event.type == pygame.KEYDOWN: # movement is made when you press a keyboard \EG
                 if event.key == pygame.K_LEFT: # if push left, move to -x axis \EG
-                    x1_change = -snake_block
-                    y1_change = 0
+                    x1_change = -snake_block 
+                    y1_change = 0 # y-axis does not change when moving left \SA
                 elif event.key == pygame.K_RIGHT: # if push right, move to +x axis \EG
-                    x1_change = snake_block
-                    y1_change = 0
+                    x1_change = snake_block 
+                    y1_change = 0 # y-axis does not change when moving right \SA
                 elif event.key == pygame.K_UP: # if push up, move to +y axis \EG
                     y1_change = -snake_block
-                    x1_change = 0
+                    x1_change = 0 # x-axis does not change when moving up \SA
                 elif event.key == pygame.K_DOWN: # if push down, move to -y axis \EG
                     y1_change = snake_block
-                    x1_change = 0
+                    x1_change = 0 x-axis does not change when moving down \SA
  
         if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0: # if snake hits the boundary, game over screen appears \EG
-            game_close = True
-        x1 += x1_change # x1 is updated by adding the x1_change in x-axis
+            game_close = True #the game ends \SA
+        x1 += x1_change # x1 is updated by adding the x1_change in x-axis \EG
         y1 += y1_change # y1 is updated by adding the x1_change in x-axis # x1, y1 is current coordinate of snake \EG
-        dis.fill(blue) # background is blue color
-        pygame.draw.rect(dis, green, [foodx, foody, snake_block, snake_block])
+        dis.fill(blue) # background is blue color \EG
+        pygame.draw.rect(dis, green, [foodx, foody, snake_block, snake_block]) #pygame draw green rectangle for food and snake \SA 
         snake_Head = [] # snake head starts with empty list \EG
         snake_Head.append(x1) # add x1 to snake_head list \EG
         snake_Head.append(y1) # add y1 to snake_head list \EG
         snake_List.append(snake_Head) # add snake_head to snake_List list \EG
-        if len(snake_List) > Length_of_snake:
-            del snake_List[0]
+        if len(snake_List) > Length_of_snake: #if the length of the snake body in list is greater than 1 \SA
+            del snake_List[0] # delete the head of the snake, which is index 0 \SA
  
-        for x in snake_List[:-1]:
-            if x == snake_Head:
-                game_close = True
+        for x in snake_List[:-1]: #for each element in snake body \SA 
+            if x == snake_Head: #if any element of the body hits the snakes head \SA
+                game_close = True # the game ends \SA
  
-        our_snake(snake_block, snake_List)
-        Your_score(Length_of_snake - 1)
+        our_snake(snake_block, snake_List) # calls snake_function, the snake body \SA
+        Your_score(Length_of_snake - 1) # calls score function, -1 to negate the snake head \SA
  
-        pygame.display.update() # update any changes made to screen
+        pygame.display.update() # update any changes made to screen \EG
  
         if x1 == foodx and y1 == foody: # if snake's location matches with food's location, \EG
-            foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0 # food's location is randomly chosen except for current location 
-            foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0 # food's location is randomly chosen except for current location 
+            foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0 # food's location is randomly chosen except for current location \EG
+            foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0 # food's location is randomly chosen except for current location \EG
             Length_of_snake += 1 # length of snake increases by factor of 1 \EG 
  
-        clock.tick(snake_speed)
+        clock.tick(snake_speed) #calls the function of the snake speed \SA
  
-    pygame.quit() # uninitialize  \EG
-    quit()
+    pygame.quit() # uninitialize pygame \EG
+    quit() # close the python program \SA
  
  
-gameLoop()
+gameLoop() #call function to loop game \SA
