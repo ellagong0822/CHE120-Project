@@ -48,6 +48,11 @@ def message(msg, color):
  
  
 def gameLoop():
+    music = pygame.mixer.music.load('bgm.mp3')
+    pygame.mixer.music.play(-1)
+    crunch_sound = pygame.mixer.Sound('crunch.wav')
+    bump_sound = pygame.mixer.Sound('boing.wav')
+    
     game_over = False # If True, game is over \EG
     game_close = False # if True, game over screen appears \EG
  
@@ -97,6 +102,7 @@ def gameLoop():
                     x1_change = 0
  
         if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0: # if snake hits the boundary, game over screen appears \EG
+            bump_sound.play()
             game_close = True
         x1 += x1_change # x1 is updated by adding the x1_change in x-axis
         y1 += y1_change # y1 is updated by adding the y1_change in y-axis # x1, y1 is current coordinate of snake \EG
@@ -112,6 +118,7 @@ def gameLoop():
  
         for x in snake_List[:-1]:
             if x == snake_Head:
+                bump_sound.play()
                 game_close = True
  
         our_snake(snake_block, snake_List)
@@ -122,7 +129,11 @@ def gameLoop():
         if x1 == foodx and y1 == foody: # if snake's location matches with food's location, \EG
             foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0 # same with above 
             foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0 
+            crunch_sound.play()
             Length_of_snake += 1 # length of snake increases by factor of 1 \EG 
+            
+            x1 = round(random.randrange(0,dis_width - foodx) /10.0) * 10.0
+            y1 = round(random.randrange(0,dis_height - foody) /10.0) * 10.0
  
         clock.tick(snake_speed)
  
