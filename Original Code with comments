@@ -21,7 +21,7 @@ dis_width = 600
 dis_height = 400
  
 dis = pygame.display.set_mode((dis_width, dis_height)) # create a screen \EG
-pygame.display.set_caption('Snake Game by Edureka') \show display caption \SA
+pygame.display.set_caption('Snake Game by Edureka') # show display caption \SA
  
 #initialize variable to track amount of time taken \SA
 clock = pygame.time.Clock()
@@ -103,6 +103,7 @@ def gameLoop():
         x1 += x1_change # x1 is updated by adding the x1_change in x-axis \EG
         y1 += y1_change # y1 is updated by adding the x1_change in x-axis # x1, y1 is current coordinate of snake \EG
         dis.fill(blue) # background is blue color \EG
+        
         pygame.draw.rect(dis, green, [foodx, foody, snake_block, snake_block]) #pygame draw green rectangle for food and snake \SA 
         snake_Head = [] # snake head starts with empty list \EG
         snake_Head.append(x1) # add x1 to snake_head list \EG
