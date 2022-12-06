@@ -34,7 +34,7 @@ def Your_score(score):
  
 def our_snake(snake_block, snake_list):
     for x in snake_list:
-        pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block]) # draw a rectangle -> our snake \EG
+        pygame.draw.rect(dis, green, [x[0], x[1], snake_block, snake_block]) # draw a rectangle -> our snake \EG
  
  
 def message(msg, color):
@@ -96,7 +96,7 @@ def gameLoop():
         x1 += x1_change # x1 is updated by adding the x1_change in x-axis
         y1 += y1_change # y1 is updated by adding the y1_change in y-axis # x1, y1 is current coordinate of snake \EG
         dis.fill(blue) # background is blue color
-        pygame.draw.rect(dis, green, [foodx, foody, snake_block, snake_block]) # food is in green, at that location \EG
+        pygame.draw.rect(dis, red, [foodx, foody, snake_block, snake_block]) # food is in green, at that location \EG
         snake_Head = [] # snake head starts with empty list \EG
         snake_Head.append(x1) # add x1 to snake_head list \EG
         snake_Head.append(y1) # add y1 to snake_head list \EG
