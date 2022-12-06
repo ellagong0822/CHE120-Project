@@ -25,7 +25,12 @@ snake_speed = 15 # snake's speed \EG
 font_style = pygame.font.SysFont("bahnschrift", 25) # font is in 25 size with font "bahnschrift" \EG
 score_font = pygame.font.SysFont("comicsansms", 35) # font is in 35 size with font "comicsansms" \EG
  
- 
+def food_color():
+    color_list = [white, yellow, black, red, green, blue]
+    color = random.choice(color_list)
+    return color
+    
+
 def Your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
     dis.blit(value, [0, 0])
@@ -96,7 +101,8 @@ def gameLoop():
         x1 += x1_change # x1 is updated by adding the x1_change in x-axis
         y1 += y1_change # y1 is updated by adding the y1_change in y-axis # x1, y1 is current coordinate of snake \EG
         dis.fill(blue) # background is blue color
-        pygame.draw.rect(dis, red, [foodx, foody, snake_block, snake_block]) # food is in green, at that location \EG
+        
+        pygame.draw.rect(dis, food_color(), [foodx, foody, snake_block, snake_block]) # food is in green, at that location \EG
         snake_Head = [] # snake head starts with empty list \EG
         snake_Head.append(x1) # add x1 to snake_head list \EG
         snake_Head.append(y1) # add y1 to snake_head list \EG
