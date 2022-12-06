@@ -67,7 +67,7 @@ def gameLoop():
  
     while not game_over: # our screen/game runs while it is not game_over \EG
  
-        while game_close == True: # if the game is over \EG
+        while game_close == True: # if the game over screen appears \EG
             dis.fill(blue) # the background color is blue \EG
             message("You Lost! Press C-Play Again or Q-Quit", red) #prints lose message on scren \SA
             Your_score(Length_of_snake - 1) #calls function of score, -1 to negate snake head \SA
@@ -77,14 +77,14 @@ def gameLoop():
                 if event.type == pygame.KEYDOWN: # if you press a key: \EG
                     if event.key == pygame.K_q: # if you press keyboard "q", game is closed \EG
                         game_over = True # the game is over \SA
-                        game_close = False #the game is over but screen stills runs \SA
-                    if event.key == pygame.K_c: # if press keyboard "c", game loops
-                        gameLoop()
+                        game_close = False #the game is over but screen still runs \SA
+                    if event.key == pygame.K_c: # if press keyboard "c", game loops \EG
+                        gameLoop() 
  
         for event in pygame.event.get(): #iterating through each event in pygame \SA
             if event.type == pygame.QUIT:#if event is QUIT \SA
                 game_over = True #the game is over \SA
-            if event.type == pygame.KEYDOWN: # movement is made when you press a keyboard \EG
+            if event.type == pygame.KEYDOWN: # event is placed when you press a keyboard \EG
                 if event.key == pygame.K_LEFT: # if push left, move to -x axis \EG
                     x1_change = -snake_block 
                     y1_change = 0 # y-axis does not change when moving left \SA
@@ -96,7 +96,7 @@ def gameLoop():
                     x1_change = 0 # x-axis does not change when moving up \SA
                 elif event.key == pygame.K_DOWN: # if push down, move to -y axis \EG
                     y1_change = snake_block
-                    x1_change = 0 x-axis does not change when moving down \SA
+                    x1_change = 0 # x-axis does not change when moving down \SA
  
         if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0: # if snake hits the boundary, game over screen appears \EG
             game_close = True #the game ends \SA
